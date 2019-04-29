@@ -119,7 +119,7 @@ SauceLabsSessionManager.prototype.killCurrentSession = function (callback) {
     });
   }.bind(this)
 
-  function getJobForBuildName(cb, skip) {
+  var getJobForBuildName = function(cb, skip) {
     if (!self.buildName) {
       // get one and kill it, this is the (flawed) default of chimp which will just randomly
       // terminate sessions and you get an odd `Error: The test with session id XXX has already finished, and can't receive further commands.` error
@@ -152,7 +152,7 @@ SauceLabsSessionManager.prototype.killCurrentSession = function (callback) {
         getJobForBuildName(cb, skip + DEFAULT_LIMIT)
       }
     }, DEFAULT_LIMIT, skip);
-  }
+  }.bind(this)
 
 
 
