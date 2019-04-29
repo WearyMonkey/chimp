@@ -30,7 +30,6 @@
   "scripts": {
     "watch": "npm-watch",
     "prepublish": "node ./scripts/prepublish.js",
-    "postinstall": "node ./scripts/prepublish.js",
     "lint": "eslint ./src",
     "lintfix": "eslint ./src --fix",
     "start": "node ./scripts/run.js",
