@@ -141,13 +141,13 @@ SauceLabsSessionManager.prototype.killCurrentSession = function (callback) {
       // }
       if (!jobs.length) {
         // no more jobs found, let's exit
+        console.warn('Couldn\'t find a job to terminate for build ' + self.build);
         callback();
         return;
       }
       var currentJob = _.find(jobs, function (b) {
         return b.build === self.build;
       });
-      console.log('currentJob', currentJob);
       if (!currentJob) {
         // maybe it's in the next batch?
         getJobForBuild(cb, skip + DEFAULT_LIMIT);
