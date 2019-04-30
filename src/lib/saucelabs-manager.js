@@ -150,6 +150,11 @@ SauceLabsSessionManager.prototype.killCurrentSession = function (callback) {
       if (!currentJobs.length) {
         // maybe it's in the next batch?
         getJobForBuild(cb, skip + DEFAULT_LIMIT)
+      } else {
+        killSession(currentJobs[0]);
+        if (currentJobs.length > 1) {
+          console.warn(`There were ${currentJobs.length} running jobs for Build ${self.build} found. Only the first was terminated.`)
+        }
       }
     }, DEFAULT_LIMIT, skip);
   }.bind(this)
