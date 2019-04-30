@@ -133,7 +133,6 @@ SauceLabsSessionManager.prototype.killCurrentSession = function (callback) {
       return;
     }
     this._getJobs(function (err, jobs) {
-      console.log('jobs', jobs);
       // the original code never uses this error,
       // probably because if we don't find anything we just leave the session alone
       // we might want to revisit this behavior
@@ -148,6 +147,7 @@ SauceLabsSessionManager.prototype.killCurrentSession = function (callback) {
       var currentJobs = _.find(jobs, function (b) {
         return b.build === self.build;
       });
+      console.log('jobs for this build', currentJobs);
       if (!currentJobs.length) {
         // maybe it's in the next batch?
         getJobForBuild(cb, skip + DEFAULT_LIMIT);
