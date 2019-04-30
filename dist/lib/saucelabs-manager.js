@@ -24,7 +24,7 @@ function SauceLabsSessionManager(options) {
   this.retryDelay = 3000;
   this.retry = 0;
 
-  this.buildName = null;
+  this.build = null;
 
   log.debug('[chimp][saucelabs-session-manager] created a new SessionManager', options);
 }
@@ -43,8 +43,8 @@ SauceLabsSessionManager.prototype.remote = function (webdriverOptions, callback)
   log.debug('[chimp][saucelabs-session-manager] creating webdriver remote ');
   var browser = this.webdriver.remote(webdriverOptions);
 
-  this.buildName = webdriverOptions.desiredCapabilities.build;
-  log.debug('[chimp][saucelabs-session-manager] BuildName: ' + this.buildName);
+  this.build = webdriverOptions.desiredCapabilities.build;
+  log.debug('[chimp][saucelabs-session-manager] build: ' + this.build);
 
   callback(null, browser);
   return;
@@ -120,11 +120,11 @@ SauceLabsSessionManager.prototype.killCurrentSession = function (callback) {
     });
   }.bind(this);
 
-  var getJobForBuildName = function (cb, skip) {
-    if (!self.buildName) {
+  var getJobForBuild = function (cb, skip) {
+    if (!self.build) {
       // get one and kill it, this is the (flawed) default of chimp which will just randomly
       // terminate sessions and you get an odd `Error: The test with session id XXX has already finished, and can't receive further commands.` error
-      console.warn('You should really consider setting a buildName, otherwise random sessions will be terminated!');
+      console.warn('You should really consider setting a build, otherwise random sessions will be terminated!');
       this._getJobs(function (err, jobs) {
         if (jobs.length) {
           killSession(jobs[0]);
@@ -146,16 +146,16 @@ SauceLabsSessionManager.prototype.killCurrentSession = function (callback) {
         return;
       }
       var currentJobs = _.find(jobs, function (b) {
-        return b.automation_build.name === self.buildName;
+        return b.build === self.build;
       });
       if (!currentJobs.length) {
         // maybe it's in the next batch?
-        getJobForBuildName(cb, skip + DEFAULT_LIMIT);
+        getJobForBuild(cb, skip + DEFAULT_LIMIT);
       }
     }, DEFAULT_LIMIT, skip);
   }.bind(this);
 
-  getJobForBuildName(killSession, 0);
+  getJobForBuild(killSession, 0);
 };
 
 module.exports = SauceLabsSessionManager;
