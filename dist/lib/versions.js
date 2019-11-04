@@ -144,7 +144,7 @@ function Versions(options) {
         _this.child = processHelper.start({
             bin: options.path,
             prefix: 'browserdriver',
-            args: ['--port=' + options.port, '--whitelisted-ips=""'],
+            args: ['--port=' + options.port, '--whitelisted-ips'],
             waitForMessage: waitMessage,
             errorMessage: /Error/
         }, callback);

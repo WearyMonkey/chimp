@@ -45,7 +45,7 @@ Chromedriver.prototype.start = function (callback) {
         this.child = processHelper.start({
             bin: chromedriverPath,
             prefix: 'chromedriver',
-            args: ['--port=' + port, '--url-base=wd/hub', '--whitelisted-ips=""'],
+            args: ['--port=' + port, '--url-base=wd/hub', '--whitelisted-ips'],
             waitForMessage: /Starting ChromeDriver/,
             errorMessage: /Error/
         }, callback);
