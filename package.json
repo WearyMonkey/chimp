@@ -29,7 +29,6 @@
   },
   "scripts": {
     "watch": "npm-watch",
-    "prepublish": "node ./scripts/prepublish.js",
     "lint": "eslint ./src",
     "lintfix": "eslint ./src --fix",
     "start": "node ./scripts/run.js",
@@ -88,7 +87,7 @@
     "cucumber": "xolvio/cucumber-js#v1.3.0-chimp.6",
     "deep-extend": "^0.4.1",
     "exit": "^0.1.2",
-    "fibers": "^2.0.2",
+    "fibers": "^4.0.3",
     "freeport": "~1.0.5",
     "fs-extra": "^1.0.0",
     "glob": "lucetius/node-glob#chimp",
@@ -109,20 +108,7 @@
     "xolvio-jasmine-expect": "^1.0.0",
     "xolvio-sync-webdriverio": "^9.0.0"
   },
-  "devDependencies": {
-    "babel-cli": "6.x.x",
-    "babel-jest": "^6.0.1",
-    "eslint": "^3.12.2",
-    "eslint-config-airbnb": "^13.0.0",
-    "eslint-plugin-babel": "^4.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.8.0",
-    "git-release-notes": "0.0.2",
-    "jest-cli": "Sanjo/jest#7c71094",
-    "npm-watch": "^0.1.6",
-    "quibble": "^0.4.0",
-    "shelljs": "^0.7.5",
-    "testdouble": "^1.10.1"
+  "resolutions": {
+    "fibers": "^4.0.2"
   }
 }
